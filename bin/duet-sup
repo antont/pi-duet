@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+# Supervisor window: plans and reviews, cannot edit or write.
+set -euo pipefail
+DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+
+exec env DUET_ROLE=supervisor pi \
+  -e "$DIR/mail/index.ts" \
+  --exclude-tools edit,write \
+  --model "${DUET_SUPERVISOR_MODEL:-github-copilot/gpt-5.6-sol}" \
+  --thinking "${DUET_SUPERVISOR_THINKING:-high}" \
+  --append-system-prompt "$DIR/roles/supervisor-mail.md" \
+  "$@"

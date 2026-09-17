@@ -1,0 +1,9 @@
+# Run transcripts and per-agent streams: local evidence, often noisy and
+# machine-specific. Never committed.
+runs/
+
+# Session file paths for resuming duet.mjs agents, per working tree.
+state/
+
+node_modules/
+*.log

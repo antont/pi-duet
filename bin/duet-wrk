@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+# Worker window: implements, full tools.
+set -euo pipefail
+DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+
+exec env DUET_ROLE=worker pi \
+  -e "$DIR/mail/index.ts" \
+  --model "${DUET_WORKER_MODEL:-github-copilot/claude-opus-5}" \
+  --thinking "${DUET_WORKER_THINKING:-medium}" \
+  --append-system-prompt "$DIR/roles/worker-mail.md" \
+  "$@"
