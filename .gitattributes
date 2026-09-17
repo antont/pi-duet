@@ -1,0 +1,4 @@
+# Keep shell scripts and sources LF on every platform: a CRLF checkout on
+# Windows breaks the shebang when these run under Git Bash or WSL.
+* text=auto eol=lf
+*.md text eol=lf
