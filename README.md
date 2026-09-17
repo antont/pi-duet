@@ -19,6 +19,31 @@ idle window wakes up and answers.
 ```bash
 # window 1 — supervisor (no edit/write tools: delegation is the only way to change code)
 cd ~/nestos.tests
+~/pi-duet/bin/duet-sup
+
+# window 2 — worker
+cd ~/nestos.tests
+~/pi-duet/bin/duet-wrk
+```
+
+On Windows use the PowerShell launchers — `bash ./bin/duet-sup` from PowerShell
+resolves to **WSL's** bash, which then cannot find node:
+
+```powershell
+cd C:\Users\tonia\src\pi-duet
+.\bin\duet-sup.ps1      # window 1
+.\bin\duet-wrk.ps1      # window 2
+```
+
+Models are overridable per launch on either platform:
+`DUET_WORKER_MODEL=github-copilot/claude-sonnet-5 ./bin/duet-wrk`, or
+`$env:DUET_WORKER_MODEL="github-copilot/claude-sonnet-5"` before the `.ps1`.
+
+The long form, if you would rather not use a launcher:
+
+```bash
+# window 1 — supervisor (no edit/write tools: delegation is the only way to change code)
+cd ~/nestos.tests
 DUET_ROLE=supervisor pi -e ~/pi-duet/mail/index.ts \
   --exclude-tools edit,write \
   --model github-copilot/gpt-5.6-sol --thinking high \
